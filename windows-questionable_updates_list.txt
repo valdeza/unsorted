@@ -131,16 +131,19 @@ http://support.microsoft.com/kb/3112343
 
 ===
 
-Update for Windows 7 for x64-based Systems (KB3102429)
+(?) Possibly beneficial
+Update for Windows 7 for x64-based Systems (KB3118401)
+
+Download size: 853 KB
 
 Update type: Optional
 
 More information: 
-http://support.microsoft.com/kb/3102429
-"Windows Update Client for Windows 7 and Windows Server 2008 R2: February 2016"
+http://support.microsoft.com/kb/3118401
+"Update for Universal C Runtime in Windows"
 
-Reason:
-Assumed win10 involvement; too broad.
+Reason: 
+Possibly enhances win10 app functionality.
 
 ===
 
@@ -151,3 +154,18 @@ Update type: Optional
 More information: 
 http://support.microsoft.com/kb/3123862
 "Updated capabilities to upgrade Windows 8.1 and Windows 7"
+
+===
+
+Update for Windows 7 for x64-based Systems (KB3138612)
+
+Download size: 3.0 MB
+
+Update type: Optional
+
+More information: 
+http://support.microsoft.com/kb/3138612
+> "This update contains some improvements"
+
+Reason: 
+Too vague!
