@@ -1,0 +1,153 @@
+Notice: This is not a complete listing of potentially unwanted Windows 7 SP1 Home Premium updates with respect to undesired Windows 10 upgrade.
+Even after hiding updates, Microsoft will re-issue and unhide updates: http://www.infoworld.com/article/2922604/microsoft-windows/microsoft-re-re-re-issues-controversial-windows-10-advertising-patch-kb-3035583.html
+In the past, Microsoft has used Windows Update to silently install updates without any way of the user knowing [citation needed]. This capability can be abused to force telemetry features despite Windows 10 not being installed.
+Some updates may include other fixes that might be beneficial to your system. Notable (read: not all) ones are marked with (?).
+
+//~~~//
+
+Persistently re-issued updates: 
+KB2952664
+KB3035583
+
+//~~~//
+
+/!\ WARNING: PERSISTENTLY RE-ISSUED
+Update for Windows 7 for x64-based Systems (KB2952664)
+
+Update type: Optional
+
+More information: 
+http://support.microsoft.com/kb/2952664
+"Compatibility update for upgrading Windows 7"
+
+===
+
+/!\ WARNING: PERSISTENTLY RE-ISSUED
+Update for Windows 7 for x64-based Systems (KB2952664)
+
+Update type: Recommended
+
+More information: 
+http://support.microsoft.com/kb/2952664
+"Compatibility update for upgrading Windows 7"
+
+Note: 
+Originally Optional, now classified Recommended.
+
+===
+
+Update for Windows 7 for x64-based Systems (KB3021917)
+
+Download size: 420 KB
+
+Update type: Recommended
+
+More information: 
+http://support.microsoft.com/kb/3021917
+> "This update performs diagnostics in Windows 7 Service Pack 1 (SP1) in order to determine whether performance issues may be encountered when the latest Windows operating system is installed. Telemetry is sent back to Microsoft for those computers that participate in the Windows Customer Experience Improvement Program (CEIP). This update will help Microsoft and its partners deliver better system performance for customers who are seeking to install the latest Windows operating system."
+
+Reason: 
+No tangible benefit. Only collects data.
+
+===
+
+Update for Windows 7 for x64-based Systems (KB3022345)
+
+Update type: Recommended
+
+More information: 
+http://support.microsoft.com/kb/3022345
+"Update to enable the Diagnostics Tracking Service in Windows"
+
+===
+
+/!\ WARNING: PERSISTENTLY RE-ISSUED
+Update for Windows 7 for x64-based Systems (KB3035583)
+
+Update type: Recommended
+
+More information: 
+http://support.microsoft.com/kb/3035583
+"Update installs Get Windows 10 app in Windows 8.1 and Windows 7 SP1"
+
+===
+
+(?) Possibly beneficial
+Update for Windows 7 for x64-based Systems (KB3050265)
+
+Download size: 3.0 MB
+
+Update type: Optional
+
+More information: 
+http://support.microsoft.com/kb/3050265
+
+Reason:
+" * General improvements are made to support upgrades to a later version of Windows."
+" * This update installs a new Group Policy object that enables you to block upgrades to the latest version of Windows through Windows Update."
+Alternative to the Group Policy object is a registry entry. Even with this entry, I still face attempts to make me download the GWX app.
+
+===
+
+Update for Windows 7 for x64-based Systems (KB3068708)
+
+Download size: 27.7 MB
+
+Update type: Recommended
+
+More information: 
+http://support.microsoft.com/kb/3068708
+"Update for customer experience and diagnostic telemetry"
+
+===
+
+Update for Windows 7 for x64-based Systems (KB3075249)
+
+Update type: Optional
+
+More information: 
+http://support.microsoft.com/kb/3075249
+"Update that adds telemetry points to consent.exe in Windows 8.1 and Windows 7"
+
+===
+
+Update for Windows 7 for x64-based Systems (KB3080149)
+
+Update type: Optional
+
+More information: 
+http://support.microsoft.com/kb/3080149
+"Update for customer experience and diagnostic telemetry"
+
+===
+
+Update for Windows 7 for x64-based Systems (KB3112343)
+
+Update type: Important
+
+More information: 
+http://support.microsoft.com/kb/3112343
+> "This update enables support for additional upgrade scenarios from Windows 7 to Windows 10, and ... also improves the ability of Microsoft to monitor the quality of the upgrade experience."
+
+===
+
+Update for Windows 7 for x64-based Systems (KB3102429)
+
+Update type: Optional
+
+More information: 
+http://support.microsoft.com/kb/3102429
+"Windows Update Client for Windows 7 and Windows Server 2008 R2: February 2016"
+
+Reason:
+Assumed win10 involvement; too broad.
+
+===
+
+Update for Windows 7 for x64-based Systems (KB3123862)
+
+Update type: Optional
+
+More information: 
+http://support.microsoft.com/kb/3123862
+"Updated capabilities to upgrade Windows 8.1 and Windows 7"
