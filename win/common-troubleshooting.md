@@ -1,4 +1,12 @@
 # Things I commonly look up but forget about
+## Renaming accounts
+
+	wmic useraccount where name='%TargetUsername%' call rename name='%NewUsername%'
+
+e.g. To rename \\\\LocalWorkstation\Administrator, replace `%TargetUsername%` with Administrator.  
+_Speaking of Administrator, don't forget to change the password for that, too.  
+(A lot of people unknowingly still have it blank after installing Windows.)_
+
 ## Viewing installed updates/hotfixes
 Relevant commands:
 
