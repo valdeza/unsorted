@@ -1,4 +1,9 @@
 # Things I commonly look up but forget about
+
+## Little things
+* `sc` - Service Control Manager CLI  
+         Can be used to delete service entries with a missing or invalid reference, like when using the Oracle Database uninstaller.
+
 ## Renaming accounts
 
 	wmic useraccount where name='%TargetUsername%' call rename name='%NewUsername%'
