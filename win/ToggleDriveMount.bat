@@ -49,9 +49,6 @@ IF ERRORLEVEL 1 (
 ) ELSE (
 	ECHO Done.
 )
-GOTO end
-::temp pause
-PAUSE 
 GOTO:EOF
 
 :end
