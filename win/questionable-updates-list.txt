@@ -1,12 +1,12 @@
 Notice: This is not a complete listing of potentially unwanted Windows 7 SP1 Home Premium updates with respect to undesired Windows 10 upgrade.
 Even after hiding updates, Microsoft will re-issue and unhide updates: http://www.infoworld.com/article/2922604/microsoft-windows/microsoft-re-re-re-issues-controversial-windows-10-advertising-patch-kb-3035583.html
-In the past, Microsoft has used Windows Update to silently install updates without any way of the user knowing [citation needed]. This capability can be abused to force telemetry features despite Windows 10 not being installed.
+In the past, Microsoft has used Windows Update to silently install updates without any way of the user knowing [citation needed]. This capability can be abused to force any update despite Windows 10 not being installed.
 Some updates may include other fixes that might be beneficial to your system. Notable (read: not all) ones are marked with (?).
 
 //~~~//
 
 Persistently re-issued updates: 
-KB2952664
+KB2952664 2+ times
 KB3035583
 
 //~~~//
