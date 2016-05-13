@@ -27,6 +27,24 @@ e.g. To rename \\\\LocalWorkstation\Administrator, replace `%TargetUsername%` wi
 _Speaking of Administrator, don't forget to change the password for that, too.  
 (A lot of people unknowingly still have it blank after installing Windows.)_
 
+## Securing page/swap file
+So Windows claims to secure it from unauthorised users. But what if you just boot to an alternative OS and try to inspect it?
+
+### Overwrite page/swap file on shutdown
+Enable Group Policy setting:  
+_Computer Configuration/Windows Settings/Security Settings/Local Policies/Security Options/Shutdown: Clear virtual memory pagefile_  
+or apply registry entry [(click here for .reg file)](regedit-entries/MemoryManagement - ClearPageFileAtShutdown.reg):  
+`\\HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\ClearPageFileAtShutdown = dword:00000001`
+
+This overwrites the file with zeroes on shutdown **but will greatly increase shutdown time** in direct proportion to the size of the file.
+
+### Encrypt page/swap file
+Run the following command as administrator:
+
+	fsutil behavior set EncryptPagingFile 1
+
+_Requires restart to take effect._
+
 ## Viewing installed updates/hotfixes
 Relevant commands:
 
