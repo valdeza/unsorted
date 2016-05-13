@@ -1,8 +1,10 @@
 # Things I commonly look up but forget about
 
 ## Little things
-* `sc` - Service Control Manager CLI  
-         Can be used to delete service entries with a missing or invalid reference, like when using the Oracle Database uninstaller.
+* `reg` - Registry Console Tool  
+          Allows scripted querying and manipulation of the Windows registry.
+* `sc`  - Service Control Manager CLI  
+          Can be used to delete service entries with a missing or invalid reference, like when using the Oracle Database uninstaller.
 
 ## File sharing (Windows-to-Windows)
 In order of my most to least common:
