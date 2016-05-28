@@ -5,6 +5,8 @@
           Allows scripted querying and manipulation of the Windows registry.
 * `sc`  - Service Control Manager CLI  
           Can be used to delete service entries with a missing or invalid reference, like when using the Oracle Database uninstaller.
+* `certutil` - Certificate Services Utility  
+               Can also be used to view cryptographic hashes for any file. See `certutil -hashfile -?` for more information.
 
 ## File sharing (Windows-to-Windows)
 In order of my most to least common:
