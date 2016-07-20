@@ -6,8 +6,9 @@ Some updates may include other fixes that might be beneficial to your system. No
 //~~~//
 
 Persistently re-issued updates: 
-KB2952664 2+ times
-KB3035583 2+ times
+KB2952664 4+ times
+KB3035583 3+ times
+KB3123862 2+ times
 
 //~~~//
 
@@ -147,6 +148,7 @@ Possibly enhances win10 app functionality.
 
 ===
 
+/!\ WARNING: PERSISTENTLY RE-ISSUED
 Update for Windows 7 for x64-based Systems (KB3123862)
 
 Update type: Optional
@@ -169,3 +171,13 @@ http://support.microsoft.com/kb/3138612
 
 Reason: 
 Too vague!
+
+===
+
+Update for Windows 7 for x64-based Systems (KB3173040)
+
+Update type: Recommended
+
+More information: 
+http://support.microsoft.com/kb/3173040
+"Windows 8.1 and Windows 7 SP1 end of free upgrade offer notification"
