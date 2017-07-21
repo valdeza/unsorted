@@ -1,3 +1,5 @@
+; Deprecated. Instead see ExplorerSessionSnapshot.psm1 for a native solution.
+
 #include <Array.au3> ; Unnecessary, just wanted to see it in action.
 
 Local $winlist = WinList()
