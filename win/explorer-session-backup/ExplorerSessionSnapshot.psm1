@@ -117,7 +117,7 @@
         $nonAutoOpenWindowsPresent = $false
         # Thanks SO: https://stackoverflow.com/a/31349468 (Answer to "get report of all open explorer windows")
         (New-Object -ComObject "Shell.Application").Windows() |
-            Where-Object { $_.Name -eq "File Explorer" } | # Exclude Internet Explorer windows, if present
+            Where-Object { <#win7#> "Windows Explorer", <#win10#> "File Explorer" -contains $_.Name } | # Exclude Internet Explorer windows, if present
             ForEach-Object {
                 if ($_.LocationURL -like "*about:blank*") # Unknown window. Silently ignore.
                 { # ...unless -Debug flag passed.
@@ -127,7 +127,7 @@
 
                 $strout = ""
                 if ($_.LocationURL)
-                    { $strout = [Uri]::UnescapeDataString($_.LocationURL) -replace "file:///","" -replace "/","\" }
+                    { $strout = [Uri]::UnescapeDataString($_.LocationURL) -replace "file:///","" -replace "file://","\\" -replace "/","\" }
                 elseif ($_.LocationName) # if LocationURL empty, LocationName not empty
                     { $strout = "// $($_.LocationName)" }
                 else # unknown explorer window
@@ -270,8 +270,8 @@ function Clear-FileExplorerSession
         # Make copy of windows since ForEach-Object apparently refreshes pipeline input (if a command).
         # InternetExplorer.Quit() modifies the ShellWindows collection.
         $explorerWindows = (New-Object -ComObject "Shell.Application").Windows() |
-            Where-Object { $_.Name -eq "File Explorer" } # Exclude Internet Explorer windows, if present
-        $explorerWindows | ForEach-Object { Write-Debug $explorerWindows.Count #dbg
+            Where-Object { <#win7#> "Windows Explorer", <#win10#> "File Explorer" -contains $_.Name } # Exclude Internet Explorer windows, if present
+        $explorerWindows | ForEach-Object {
                 if ($_.LocationURL -like "*about:blank*") # Unknown window. Silently ignore.
                 { # ...unless -Debug flag passed.
                     Write-Debug "Found 'about:blank': $_"
@@ -280,7 +280,7 @@ function Clear-FileExplorerSession
 
                 $strout = ""
                 if ($_.LocationURL)
-                    { $strout = [Uri]::UnescapeDataString($_.LocationURL) -replace "file:///","" -replace "/","\" }
+                    { $strout = [Uri]::UnescapeDataString($_.LocationURL) -replace "file:///","" -replace "file://","\\" -replace "/","\" }
                 elseif ($_.LocationName) # if LocationURL empty, LocationName not empty
                     { $strout = "// $($_.LocationName)" }
                 else # unknown explorer window
