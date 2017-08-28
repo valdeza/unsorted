@@ -21,7 +21,7 @@ In order of my most to least common:
   Client: Run `msdt -id NetworkDiagnosticsFileShare` (Shared Folders troubleshooter)
   * Reset Windows Sockets?  
     Sometimes the troubleshooter mentions that the "Windows Sockets registry entries required for network connectivity are missing" but does not seem fix it. So it is reset by running `netsh winsock reset` **as administrator**.
-* Just restart the computer, maybe? [](With each passing year, PC uptime improves. Shut down your computer, they say! It's not a server, they say! Not counting the Patch Tuesday restarts, I probably could have stayed up for about half a year before I broke something.)
+* Just restart the computer, maybe? <!--With each passing year, PC uptime improves. Shut down your computer, they say! It's not a server, they say! Not counting the Patch Tuesday restarts, I probably could have stayed up for about half a year before I broke something.-->
 
 ## Renaming accounts
 
