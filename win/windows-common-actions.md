@@ -61,3 +61,31 @@ Relevant commands:
 It's probably the fact that you have not restarted your PC in a while and you have updates waiting to be installed (requiring restart).
 
 How? Using Procmon (Sysinternals' Process Monitor), notice how svchost.exe (netsvcs) constantly queries the value of registry entry "HKLM\SYSTEM\Setup\SystemSetupInProgress".
+
+## Working with COM objects
+_yay automation_
+
+To fetch all registered COM objects:
+```powershell
+#PowerShell
+Get-ChildItem HKLM:\SOFTWARE\Classes |
+	Where-Object {$_.PSChildName -match '^\w+\.\w+$' -and (Test-Path "$($_.PSPath)\CLSID")} |
+	Select-Object -ExpandProperty PSChildName
+#source: http://www.powershellmagazine.com/2013/06/27/pstip-get-a-list-of-all-com-objects-available/
+```
+Working with COM objects:
+```powershell
+#PowerShell
+# Create COM object to manipulate a Microsoft Excel instance
+$comExcelApp = New-Object -ComObject "Excel.Application"
+# List available properties and methods of COM object
+$comExcelApp | Get-Member
+```
+COM objects are available in a wide variety of flavours, such as VBA <!--VisualBoyAdvance--> (Visual Basic for Applications):
+```vba
+Dim objExcel
+Set objExcel = CreateObject("Excel.Application")
+objExcel.Workbooks.Add
+objExcel.Range("A1").Select
+objExcel.ActiveCell.Value = "[auto-spreadsheet intensifies]"
+```
