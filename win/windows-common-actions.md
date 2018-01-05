@@ -80,6 +80,9 @@ Working with COM objects:
 $comExcelApp = New-Object -ComObject "Excel.Application"
 # List available properties and methods of COM object
 $comExcelApp | Get-Member
+# Alternatively, bind to a currently-running Microsoft Word instance
+$comWordApp = [System.Runtime.InteropServices.Marshal]::GetActiveObject("Word.Application")
+#yeahno as far as I know there's no 'Get-Object' or anything of the sort
 ```
 COM objects are available in a wide variety of flavours, such as VBA <!--VisualBoyAdvance--> (Visual Basic for Applications):
 ```vba
@@ -88,4 +91,8 @@ Set objExcel = CreateObject("Excel.Application")
 objExcel.Workbooks.Add
 objExcel.Range("A1").Select
 objExcel.ActiveCell.Value = "[auto-spreadsheet intensifies]"
+
+' Reminder that you can bind to already-running instances
+Dim objWord
+Set objWord = GetObject(, "Word.Application")
 ```
