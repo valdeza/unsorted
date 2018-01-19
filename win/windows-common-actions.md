@@ -62,6 +62,13 @@ It's probably the fact that you have not restarted your PC in a while and you ha
 
 How? Using Procmon (Sysinternals' Process Monitor), notice how svchost.exe (netsvcs) constantly queries the value of registry entry "HKLM\SYSTEM\Setup\SystemSetupInProgress".
 
+## Windows Defender: Configuring Automatic Updating
+_To keep anti-virus up-to-date while Windows Update is configured to **not** automatically install updates._
+
+In Windows 10 (and supposedly since Windows 8), anti-virus updates became tied with Windows Update. In this situation, you might have to install virus definition files alongside other Windows updates that require a machine restart.
+
+To have Windows Defender at least keep _itself_ up-to-date, open Task Scheduler and create a new task: have it run program "C:\Program Files\Windows Defender\MpCmdRun.exe" with argument `-SignatureUpdate` . Have the task run as often as you like (suggested: daily frequency).
+
 ## Working with COM objects
 _yay automation_
 
