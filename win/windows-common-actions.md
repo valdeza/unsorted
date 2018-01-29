@@ -49,7 +49,32 @@ Run the following command as administrator:
 
 _Requires restart to take effect._
 
-## Viewing installed updates/hotfixes
+## Windows Defender: Configuring Automatic Updating
+_To keep anti-virus up-to-date while Windows Update is configured to **not** automatically install updates._
+
+In Windows 10 (and supposedly since Windows 8), anti-virus updates became tied with Windows Update. In this situation, you might have to install virus definition files alongside other Windows updates that require a machine restart.
+
+To have Windows Defender at least keep _itself_ up-to-date, open Task Scheduler and create a new task: have it run program "C:\Program Files\Windows Defender\MpCmdRun.exe" with argument `-SignatureUpdate` . Have the task run as often as you like (suggested: daily frequency).
+
+## Windows Update
+### Automatic Restart Prevention Checklist
+_Do let me know I have updates available. **Do not forcibly terminate everything I have open, Microsoft.**_
+
+- Restrict task 'Microsoft\Windows\UpdateOrchestrator\Reboot'
+	- Disable via Task Scheduler  
+	  (and enable tasks history to track future attempts to run this task)
+	- Restrict access to task file:
+		1. Navigate to '%WINDIR%\System32\Tasks\Microsoft\Windows\UpdateOrchestrator'
+		1. Take ownership of 'Reboot' (from SYSTEM) via `takeown`
+		1. Apply DENY ALL permissions:  
+		   `icacls Reboot /inheritance:r /deny "Everyone:F" /deny "SYSTEM:F" /deny "Local Service:F" /deny "Administrators:F"`
+		1. Rename 'Reboot' to 'Reboot.bak'
+		1. Create directory 'Reboot'  
+		   	> Random fact: You cannot (re)create a file that has the same name as a pre-existing directory.
+		1. Apply same ownership and permissions as 'Reboot.bak'
+- Inspect group policies at 'Computer Configuration\Administrative Templates\Windows Components\Windows Update'
+
+### Viewing installed updates/hotfixes
 Relevant commands:
 
 	:: "Quick-Fix Engineering"
@@ -57,17 +82,10 @@ Relevant commands:
 	
 	systeminfo [> %SaveOutputFilepath%]
 
-## Why Windows Update (wuauserv) takes up 100% CPU
+### wuauserv.exe takes up 100% CPU
 It's probably the fact that you have not restarted your PC in a while and you have updates waiting to be installed (requiring restart).
 
 How? Using Procmon (Sysinternals' Process Monitor), notice how svchost.exe (netsvcs) constantly queries the value of registry entry "HKLM\SYSTEM\Setup\SystemSetupInProgress".
-
-## Windows Defender: Configuring Automatic Updating
-_To keep anti-virus up-to-date while Windows Update is configured to **not** automatically install updates._
-
-In Windows 10 (and supposedly since Windows 8), anti-virus updates became tied with Windows Update. In this situation, you might have to install virus definition files alongside other Windows updates that require a machine restart.
-
-To have Windows Defender at least keep _itself_ up-to-date, open Task Scheduler and create a new task: have it run program "C:\Program Files\Windows Defender\MpCmdRun.exe" with argument `-SignatureUpdate` . Have the task run as often as you like (suggested: daily frequency).
 
 ## Working with COM objects
 _yay automation_
