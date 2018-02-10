@@ -23,6 +23,15 @@ In order of my most to least common:
     Sometimes the troubleshooter mentions that the "Windows Sockets registry entries required for network connectivity are missing" but does not seem fix it. So it is reset by running `netsh winsock reset` **as administrator**.
 * Just restart the computer, maybe? <!--With each passing year, PC uptime improves. Shut down your computer, they say! It's not a server, they say! Not counting the Patch Tuesday restarts, I probably could have stayed up for about half a year before I broke something.-->
 
+## PowerShell
+```powershell
+# Linux `tail -f` equivalent
+Get-Content $varFilepath -Wait
+
+# List available methods for command outputs
+$varCommand | Get-Member
+```
+
 ## Renaming accounts
 
 	wmic useraccount where name='%TargetUsername%' call rename name='%NewUsername%'
