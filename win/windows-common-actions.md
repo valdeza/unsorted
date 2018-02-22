@@ -40,6 +40,12 @@ e.g. To rename \\\\LocalWorkstation\Administrator, replace `%TargetUsername%` wi
 _Speaking of Administrator, don't forget to change the password for that, too.  
 (A lot of people unknowingly still have it blank after installing Windows.)_
 
+## Resetting graphics driver
+`[Win] + [Ctrl] + [Shift] + [B]`
+
+Supposedly available since Windows Update KB4022716 (June 27, 2017—KB4022716 (OS Build 15063.447), Applies to: Windows 10).  
+source: https://www.reddit.com/r/sysadmin/comments/6l7cyk/kb4022716_win_ctrl_shift_b_windows_10/?ref=share&ref_source=link 
+
 ## Securing page/swap file
 So Windows claims to secure it from unauthorised users. But what if you just boot to an alternative OS and try to inspect it?
 
