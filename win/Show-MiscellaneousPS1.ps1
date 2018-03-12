@@ -10,10 +10,11 @@
     # Linux `tail -f` equivalent
     Get-Content $varFilepath -Wait
 
-
-
     # List available methods for command outputs
     $varCommand | Get-Member
+
+    # Personal preferred timestamp (esp. for file naming)
+    (Get-Date -Format 'yyyyMMddHHmmsszzz') -replace ':',''
 
 
 
