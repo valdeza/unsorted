@@ -16,6 +16,9 @@
     # Personal preferred timestamp (esp. for file naming)
     (Get-Date -Format 'yyyyMMddHHmmsszzz') -replace ':',''
 
+    # Shuffle arbitrary array
+    $varArray | Sort-Object {Get-Random}
+
 
 
     # Madman's 'disk cleanup'
