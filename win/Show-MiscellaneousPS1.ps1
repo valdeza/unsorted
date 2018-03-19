@@ -7,6 +7,9 @@
 
 
 
+    # Count lines in files (could be used for source code files out of curiosity)
+    Get-ChildItem *.cpp,*.h -Recurse | Get-Content | Measure-Object -Line
+
     # Linux `tail -f` equivalent
     Get-Content $varFilepath -Wait
 
