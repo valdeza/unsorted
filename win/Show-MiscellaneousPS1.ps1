@@ -19,6 +19,9 @@
     # Personal preferred timestamp (esp. for file naming)
     (Get-Date -Format 'yyyyMMddHHmmsszzz') -replace ':',''
 
+    # Set PowerShell console title (for labelling my sessions)
+    $Host.UI.RawUI.WindowTitle = $varstrNewTitle
+
     # Shuffle arbitrary array
     $varArray | Sort-Object {Get-Random}
 
