@@ -80,6 +80,14 @@ _Do let me know I have updates available. **Do not forcibly terminate everything
 		1. Apply same ownership and permissions as 'Reboot.bak'
 - Inspect group policies at 'Computer Configuration\Administrative Templates\Windows Components\Windows Update'
 
+### Check for updates on demand (without installing)
+One of the following, depending on distribution:
+```powershell
+& wuaclt.exe /detectnow
+(New-Object -ComObject Microsoft.Update.AutoUpdate).DetectNow()
+& UsoClient.exe startscan
+```
+
 ### Viewing installed updates/hotfixes
 Relevant commands:
 
