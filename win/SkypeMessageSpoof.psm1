@@ -1,4 +1,6 @@
-﻿function Get-ClipboardAsDataObject
+﻿Add-Type -AssemblyName 'System.Windows.Forms'
+
+function Get-ClipboardAsDataObject
 {
     <#
     .SYNOPSIS
@@ -92,7 +94,7 @@ function Set-ClipboardSkypeMessage
         [parameter(ParameterSetName='ManualInput', Mandatory)]
         [string] $MessageGuid
     )
-    $billgatesEpoch = [datetime]::new(1969, 12, 31, 20, 0, 0)
+    $billgatesEpoch = New-Object 'System.DateTime' @(1969, 12, 31, 20, 0, 0)
     $data = New-Object 'System.Windows.Forms.DataObject'
 
     # Extract InputObject data if provided InputObject,
@@ -149,9 +151,8 @@ function Set-ClipboardSkypeMessage
 
 &lt;&lt;&lt; </legacyquote></quote>' -f `
     "$AuthorUsername", "$AuthorName", "$ConversationId", "$MessageGuid", "$strTimestamp", "$strFmtTimestamp", "$MessageString"
-    $data.SetData(
-        'SkypeMessageFragment',
-        [System.IO.MemoryStream]::new([byte[]][char[]]$strSkypeMessageFragment)
-    )
+
+    $memstream = New-Object 'System.IO.MemoryStream' @(,[byte[]][char[]]$strSkypeMessageFragment)
+    $data.SetData('SkypeMessageFragment', $memstream)
     [System.Windows.Forms.Clipboard]::SetDataObject($data)
 }
