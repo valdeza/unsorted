@@ -1,0 +1,128 @@
+<html>
+<head>
+<link rel="stylesheet" href="/assets/css/style.css">
+<script>
+"use strict";
+const timemults = {
+	sec : 1,
+	min : 60,
+	hr  : 3600, // x60
+	dy  : 86400, // x24
+	wk  : 604800, // x7
+	mo  : 2419200, // x4
+	yr  : 31449600 // x13
+};
+
+function forminit() {
+	["freqmultid", "savmultid", "expmultid"].forEach(function(id) {
+		for (const key in timemults) {
+			let optnode = document.createElement("option");
+			optnode.setAttribute("value", key);
+			optnode.innerText = key;
+			document.getElementById(id).appendChild(optnode);
+		}
+	});
+}
+
+function docalc() {
+	let bfailfast = false;
+
+	// Fetch form data
+	let form = document.forms["calc"];
+	let // Check if numbers isNaN() before use
+		nfreq = form["freq"].valueAsNumber,
+		nfreqmult = form["freqmult"].value,
+		nsav = form["sav"].valueAsNumber,
+		nsavmult = form["savmult"].value,
+		nexp = form["exp"].valueAsNumber,
+		nexpmult = form["expmult"].value;
+
+	// Normalise values
+	[
+		[nfreq, "frequency"],
+		[nsav, "savings"],
+		[nexp, "lifetime"]
+	].every(function(e) {
+		if (isNaN(e[0])) {
+			form["result"].value = "Invalid " + e[1] + " value";
+			bfailfast = true;
+			return false;
+		}
+		return true;
+	});
+	if (bfailfast) { return; }
+
+	nfreqmult = timemults[nfreqmult];
+	nsavmult = timemults[nsavmult];
+	nexpmult = timemults[nexpmult];
+
+	let savings = (nfreq / nfreqmult) * nsav * nsavmult * nexp * nexpmult;
+	if (savings < 60) {
+		form["result"].value = savings + " seconds";
+		return;
+	}
+	savings /= 60;
+	if (savings < 60) {
+		form["result"].value = savings + " minutes";
+		return;
+	}
+	savings /= 60;
+	if (savings < 24) {
+		form["result"].value = savings + " hours";
+		return;
+	}
+	savings /= 24;
+	if (savings < 7) {
+		form["result"].value = savings + " days";
+		return;
+	}
+	savings /= 7;
+	if (savings < 5) {
+		form["result"].value = savings + " weeks";
+		return;
+	}
+	savings /= 4.333;
+	if ((savings * 4.333) < 52) {
+		form["result"].value = savings + " months";
+		return;
+	}
+	savings *= 4.333 / 52;
+	form["result"].value = savings + " years";
+};
+</script>
+</head>
+
+<body onload="forminit()">
+<h1>Is It Worth the Time?</h1>
+<p><a href="https://www.xkcd.com/1205/">Inspired by xkcd.</a></p>
+
+<form name="calc" oninput="docalc()">
+	How often you do the task:<br>
+	<input type="number" name="freq" id="freqid"> 
+	per <select name="freqmult" id="freqmultid"></select>
+	<br><br>
+
+	How much time you shave off:<br>
+	<input type="number" name="sav" id="savid"> 
+	<select name="savmult" id="savmultid"></select>
+	<br><br>
+
+	How long you need to repeat the task:<br>
+	<input type="number" name="exp" id="expid"> 
+	<select name="expmult" id="expmultid"></select>
+	<br><br>
+
+	Result:<br>
+	<output name="result" for="freq freqmult sav savmult exp expmult"></output>
+</form>
+
+<hr>
+
+<p>I find myself frequenting Munroe's time table whenever I'm thinking of doing a thing,
+<br>another site wants me to give out my email to get the answer,
+<br>and I'm too lazy to <kbd>[Win]+R calc.exe</kbd> .</p>
+
+<p>So what do? Make a freely accessible online calculator, apparently.
+<br>Was this worth the time? Frankly no, but I got to play with Jekyll and write a bit of HTML. Didn't have HTML5 back in my day. <!-- (Remember when XHTML first came out?) --> </p>
+</body>
+</html>
