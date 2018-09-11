@@ -1,6 +1,10 @@
+---
+title: Is It Worth the Time? - Calculator
+---
 <html>
 <head>
-<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="assets/css/style.css">
+<title>{{ page.title }}</title>
 <script>
 "use strict";
 const timemults = {
@@ -81,12 +85,12 @@ function docalc() {
 		form["result"].value = savings + " weeks";
 		return;
 	}
-	savings /= 4.333;
-	if ((savings * 4.333) < 52) {
+	savings /= 4.34524;
+	if ((savings * 4.34524) < 52) {
 		form["result"].value = savings + " months";
 		return;
 	}
-	savings *= 4.333 / 52;
+	savings /= 12;
 	form["result"].value = savings + " years";
 };
 </script>
@@ -112,14 +116,14 @@ function docalc() {
 	<select name="expmult" id="expmultid"></select>
 	<br><br>
 
-	Result:<br>
-	<output name="result" for="freq freqmult sav savmult exp expmult"></output>
+	How long you can work on improvements before spending more time than you save:
+	<br><output name="result" for="freq freqmult sav savmult exp expmult">[output]</output>
 </form>
 
 <hr>
 
 <p>I find myself frequenting Munroe's time table whenever I'm thinking of doing a thing,
-<br>another site wants me to give out my email to get the answer,
+<br>another site wants me to give out my email to get precise answers,
 <br>and I'm too lazy to <kbd>[Win]+R calc.exe</kbd> .</p>
 
 <p>So what do? Make a freely accessible online calculator, apparently.
