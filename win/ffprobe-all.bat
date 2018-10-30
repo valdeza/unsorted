@@ -1,4 +1,6 @@
 @ECHO OFF
+:: Deprecated. Instead see Invoke-FFmpegConvertToKindleMp3.psm1 for an automated solution that also uses FFmpeg.
+
 ::ffprobe-all.bat Quickly obtain a list of bitrates for use in ffmpeg-conv-all.bat
 
 SET FFPROBE_BIN="%userprofile%\ProgramFiles\ffmpeg\bin\ffprobe.exe"

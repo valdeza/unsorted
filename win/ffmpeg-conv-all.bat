@@ -1,4 +1,6 @@
 @ECHO OFF
+:: Deprecated. Instead see Invoke-FFmpegConvertToKindleMp3.psm1 for an automated solution that also uses FFprobe.
+
 ::ffmpeg-conv-all.bat Quickly mass-convert all files in the current directory of a specified file extension to an audio file.
 ::
 :: Only tested with .mp3 since, well, my Kindle Fire likes .mp3 .
