@@ -230,7 +230,7 @@ function Invoke-FFmpegConvertToKindleMp3
             if ($bReportTotalProgress)
             {
                 $progressArgs['Status'] = "$cProcessed / $($AudioFiles.Count) files processed"
-                $progressArgs['PercentComplete'] = (if ($cProcessed -eq 0) {0} else {100.0 * ($nBytesDone - $fin.Length) / $nBytesTotal})
+                $progressArgs['PercentComplete'] = $(if ($cProcessed -eq 0) {0} else {100.0 * ($nBytesDone - $fin.Length) / $nBytesTotal})
             }
             if ($cFailed -gt 0)
                 { $progressArgs['Status'] += ", $cFailed failed" }
