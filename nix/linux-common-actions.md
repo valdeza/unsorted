@@ -9,6 +9,24 @@
 
 	$ echo 1 >/proc/sys/net/ipv4/icmp_echo_ignore_all
 
+## SOCKS5 proxied downloads by console
+Since _wget_ does not seem to natively support SOCKS5 proxies, we can use _curl_ :
+```
+$ curl -x 'socks5://127.0.0.1:1080' -C - -O "$URL"
+
+EXPLAINED OPTIONS
+-C, --continue-at <offset>
+   An offset of '-' tells curl to automatically find out where/how to resume
+   a previously-interrupted transfer using the given output/input files.
+
+-O, --remote-name
+   In current working directory,
+   write output to local file named like the remote file we get.
+
+-x, --proxy [protocol://]host[:port]
+   If protocol:// prefix omitted, http:// will be used.
+```
+
 <!--
 ## Metasploit Framework quick start
 `msfdb init` - Initialise database for first time use.  
