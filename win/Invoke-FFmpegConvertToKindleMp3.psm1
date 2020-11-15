@@ -192,6 +192,7 @@ function Invoke-FFmpegConvertToKindleMp3
         $cFailed = 0
         $nBytesDone = 0
         $nBytesTotal = 0
+        $dtStart = [datetime]::Now
         $bReportTotalProgress = $AudioFiles.Count -gt 0
         if ($bReportTotalProgress)
         {
@@ -231,6 +232,12 @@ function Invoke-FFmpegConvertToKindleMp3
             {
                 $progressArgs['Status'] = "$cProcessed / $($AudioFiles.Count) files processed"
                 $progressArgs['PercentComplete'] = $(if ($cProcessed -eq 0) {0} else {100.0 * ($nBytesDone - $fin.Length) / $nBytesTotal})
+                # ETA derivation:
+                # *reminder: Also update other occurrences of $progressArgs['SecondsRemaining']
+                # SecondsElapsed per PercentagePoint * RemainingPercentagePoints = EstSecondsToCompleteRemainingPercentage
+                #$progressArgs['SecondsRemaining'] = ([datetime]::Now - $dtStart).TotalSeconds / $progressArgs['PercentComplete'] * (100.0 - $progressArgs['PercentComplete'])
+                # then simplify:
+                $progressArgs['SecondsRemaining'] = $(if ($cProcessed -eq 0) {0} else {([datetime]::Now - $dtStart).TotalSeconds * (100.0 / $progressArgs['PercentComplete'] - 1.0)})
             }
             if ($cFailed -gt 0)
                 { $progressArgs['Status'] += ", $cFailed failed" }
@@ -240,13 +247,14 @@ function Invoke-FFmpegConvertToKindleMp3
                 'Activity' = 'ffprobe: Analysing file...'
                 'Id' = $PROGID_PROC
                 'ParentId' = $PROGID_MAIN
+                'SecondsRemaining' = -1 # unknown or n/a
             }
             Write-Progress @progressArgs_File
 
             $psi = New-Object 'System.Diagnostics.ProcessStartInfo'
             $psi.FileName = "$FFprobeBinPath"
             $psi.Arguments = """$($fin.FullName)"""
-            Write-Debug $fin.FullName
+            Write-Debug "exec: ffprobe.exe $($psi.Arguments)"
             $psi.UseShellExecute = $false # Required for redirecting IOstreams
             $psi.RedirectStandardOutput = $true
             $psi.RedirectStandardError = $true
@@ -333,19 +341,25 @@ function Invoke-FFmpegConvertToKindleMp3
             $psi.UseShellExecute = $false # Required for redirecting IOstreams
             $psi.RedirectStandardOutput = $false
             $psi.RedirectStandardError = $true
+            # Prevent pop-up from interrupting user
+            $psi.WindowStyle = [System.Diagnostics.ProcessWindowStyle]::Minimized
+            $psi.CreateNoWindow = $true
             $p = New-Object 'System.Diagnostics.Process'
             $p.StartInfo = $psi
             $p.Start() | Out-Null
+            $p.PriorityClass = [System.Diagnostics.ProcessPriorityClass]::BelowNormal
             while (!$p.HasExited)
             {
                 $strstat = $p.StandardError.ReadLine()
                 if ($strstat -eq $null)
                     { break } # End of stream reached
-                Write-Debug $strstat
 
-                $slsstat = ($strstat | Select-String -Pattern 'size=\s*(?<size>\d+)kB time=(?<th>\d+):(?<tm>\d+):(?<ts>\d+\.\d+) bitrate=\s*(?<bitrate>[\d\.]+)kbits/s speed=(?<speed>[\d\.]+)x' -List).Matches
+                $slsstat = ($strstat | Select-String -Pattern 'size=\s*(?<size>\d+)kB time=(?<th>\d+):(?<tm>\d+):(?<ts>\d+\.\d+) bitrate=\s*(?<bitrate>[\d\.]+)kbits/s speed=\s*(?<speed>[\d\.]+)x' -List).Matches
                 if ($slsstat.Count -eq 0)
-                    { continue } # Target pattern mismatch
+                {
+                    Write-Debug "File processing output, string pattern mismatch: $strstat"
+                    continue
+                }
 
                 $slsstat = $slsstat[0].Groups
                 if ($nSecDuration -eq -1)
@@ -374,11 +388,13 @@ function Invoke-FFmpegConvertToKindleMp3
                         )
                     }
                     else
-                        { $progressArgs_File['Status'] = "time=${nSecDuration}s/${nSecProcessed}" }
+                        { $progressArgs_File['Status'] = "time=${nSecProcessed}s/${nSecDuration}" }
+                    $progressArgs_File['SecondsRemaining'] = [int](($nSecDuration - $nSecProcessed) / "$($slsstat['speed'])")
 
                     if ($bReportTotalProgress)
                     {
                         $progressArgs['PercentComplete'] = 100.0 * ($nBytesDone - $fin.Length * (1.0 - $nSecProcessed / $nSecDuration)) / $nBytesTotal
+                        $progressArgs['SecondsRemaining'] = ([datetime]::Now - $dtStart).TotalSeconds * (100.0 / $progressArgs['PercentComplete'] - 1.0)
                         Write-Progress @progressArgs
                     }
                 }
