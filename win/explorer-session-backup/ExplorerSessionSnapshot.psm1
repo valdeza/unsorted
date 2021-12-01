@@ -165,6 +165,11 @@ function Restore-FileExplorerSession
     Prints each explorer directory path as they are read from file.
     By default, this function does not generate any output.
 
+    .PARAMETER WaitPeriod
+    In milliseconds, how long to sleep between explorer window spawns.
+    Useful for keeping explorer windows retaining order specified in input file
+    or for slow PCs.
+
     .PARAMETER WhatIf
     Shows what would happen if the function runs. The function is not run.
 
@@ -193,7 +198,8 @@ function Restore-FileExplorerSession
         })]
         [string] $Path,
 
-        [switch] $PassThru
+        [switch] $PassThru,
+        [int] $WaitPeriod
     )
 
     $app = New-Object -ComObject "Shell.Application"
@@ -208,9 +214,9 @@ function Restore-FileExplorerSession
         elseif ($PSCmdlet.ShouldProcess("Path: $_", "Open Explorer"))
         {
             $app.Explore($_)
-
             if ($PassThru)
                 { Write-Output $_ }
+            Start-Sleep -Milliseconds $WaitPeriod
         }
     }
 }
