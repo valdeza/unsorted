@@ -12,6 +12,13 @@ To do this for only the current repository, add the following to `.git/config`:
   email = $email
 ```
 
+## Git: Miscellany
+My personal git-log graph format string.  
+I also want to know _who_ committed something _when_.
+```
+git log --graph --all --pretty="%C(auto)%h %as |%cn|%d %s"
+```
+
 ## Steam: Manually moving game program data between libraries
 _because while Steam has the capability to do this, it doesn't work a lot of the time (for me)!_
 1. Ensure there is no ongoing download for the game to be moved
