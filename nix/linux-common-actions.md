@@ -9,6 +9,35 @@
 
 	$ echo 1 >/proc/sys/net/ipv4/icmp_echo_ignore_all
 
+## docx_search
+DOCX files are just ZIP archives of XML, so `grep` it.
+
+Copied here for easy personal reference.  
+_Modified:_ Search root defaults to current directory ('.') instead of root ('/')
+
+```bash
+#source:
+#  direct-url: https://unix.stackexchange.com/a/630451
+#  author: 'stackexchange.unix:Camusensei'
+#  posted-at: 2021-01-22 17:09
+#  url: https://unix.stackexchange.com/questions/28467/command-line-tool-to-search-docx-files
+#
+# usage: [root='/path/to/search/'] docx_search TERMS...
+docx_search(){
+  local arg wordfile terms=() root=${root:-.}
+  # this 'root' assignment allows you to search in a specific location like /cygdrive/c/ instead of everywhere on the machine
+  for arg; do terms+=(-e "$arg"); done
+  # We inject the terms to search inside the string with declare -p`
+  find 2>/dev/null "${root%/}/" -iname '*.docx' -exec \
+    bash -c "$(declare -p terms)"';
+      for arg; do
+        unzip -p "$arg" 2>/dev/null |
+          grep --quiet --ignore-case --fixed-strings "${terms[@]}" &&
+          printf %s\\n "$arg"
+      done' _ {} +
+}
+```
+
 ## _jq:_ Print each path per line
 _Makes keys & values more easily greppable._
 
